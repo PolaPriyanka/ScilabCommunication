@@ -34,4 +34,4 @@ title(' Modulated signal');
 subplot(3,1,2); plot(o);
 title('Demodulated signal');
 subplot(3,1,3); plot(axis,zz1);
-title('Spectrum of Message signal');
+title('Spectrum of Demodulated signal');
