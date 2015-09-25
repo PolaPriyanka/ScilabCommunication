@@ -1,4 +1,4 @@
-function z = ssbdemod(y, Fc, Fs, ini_phase,varargin)
+function z = ssbdemod(y, Fc, Fs, varargin)
     
 // SSBDEMOD is a function which performs Single sideband amplitude demodulation
 
@@ -16,7 +16,7 @@ function z = ssbdemod(y, Fc, Fs, ini_phase,varargin)
 //   adds extra arguments about the filter specifications 
 //   i.e., the numerator and denominator of the lowpass filter.
 //
-//   Fs must satisfy Fs > 2*(Fc + BW), where BW is the bandwidth of the
+//   Fs must satisfy Fs >2*(Fc + BW), where BW is the bandwidth of the
 //   modulating signal.
  
 
@@ -37,29 +37,32 @@ if(~isreal(y)| ~or(type(y)==[1 5 8]) )
 end
 
 if(~isreal(Fc) | ~isscalar(Fc) | Fc<=0 | ~or(type(Fc)==[1 5 8]) )
-    error("comm:ssbdemod: Fc must be Real, scalar, positive");
+    error("comm:ssbdemod:Fc must be Real, scalar, positive");
 end
 
 if(~isreal(Fs) | ~isscalar(Fs) | Fs<=0 | ~or(type(Fs)==[1 5 8]) )
-    error("comm:ssbdemod: Fs must be Real, scalar, positive");
+    error("comm:ssbdemod:Fs must be Real, scalar, positive");
 end
 
 // Check if Fs is greater than 2*Fc
 if(Fs<=2*Fc)
-    error("comm:ssbdemod: Fs<2Fc: Nyquist criteria");
+    error("comm:ssbdemod:Fs<2Fc:Nyquist criteria");
 end
 
 // Check initial phase
 
-if(inpa<4 | isempty(ini_phase) )
+if(inpa<4 )
     ini_phase = 0;
-elseif(~isreal(ini_phase) | ~isscalar(ini_phase)| ~or(type(ini_phase)==[1 5 8]) )
-    error("comm:ssbdemod:iniphaseReal");
+else 
+    ini_phase = varargin(1);
+end
+if(~isreal(ini_phase) | ~isscalar(ini_phase)| ~or(type(ini_phase)==[1 5 8]) )
+    error("comm:ssbdemod:Initial phase shoould be Real");
 end
 
 // Filter specifications
-if(isempty(varargin))  
-    H = iir(7,'lp','butt',[Fc/Fs,0],[.1,.1]); 
+if(inpa<5)  
+    H = iir(5,'lp','butt',[Fc/Fs,0],[0,0]); 
     
     num = coeff(H(2));
     den = coeff(H(3));
@@ -74,7 +77,7 @@ elseif( (inpa == 5) )
 elseif( bitxor( isempty(varargin(1)), isempty(varargin(2))))
     error(message('comm:ssbdemod:Filter specifications'));
 elseif(  isempty(varargin(1)) & isempty(varargin(2)) ) 
-    H = iir(7,'lp','butt',[Fc/Fs,0],[.1,.1]); 
+    H = iir(7,'lp','butt',[Fc/Fs*2*%pi,0],[0,0]); 
     
     num = coeff(H(2));
     den = coeff(H(3));
@@ -98,7 +101,10 @@ t = (0 : 1/Fs :(size(y,1)-1)/Fs)';
 t = t(:, ones(1, size(y, 2)));
 z = y .* cos(2*%pi * Fc * t + ini_phase);
 for i = 1 : size(z, 2)
-    z(:, i) = filter(num, den, z(:, i)) * 2;
+    z(:, i) = filter(num, den, z(:, i)) ;
+    z=z(length(z):-1:1)
+    z(:, i) = filter(num, den, z(:, i)) ;
+    z=z*-2;
 end;
 
 // restore the output signal to the original orientation 
@@ -108,3 +114,4 @@ end
 
 endfunction
 
+// End of function
