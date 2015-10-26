@@ -11,9 +11,11 @@ function [seq] = arithdeco(code, count, len)
     //Reference :
         //Sayood, K., Introduction to Data Compression, Morgan Kaufmann, 2000, Chapter 4, Section 4.4.3.
     
-    //Input argument check
     
     // Written by POLA LAKSHMI PRIYANKA, FOSSEE, IIT BOMBAY //
+    
+    //Input argument check
+    
     [outa,inpa]=argn(0);
     if(~inpa==3)
     error("comm:arithenco:Wrong number of Input Arguments");
