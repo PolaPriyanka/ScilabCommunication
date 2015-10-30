@@ -24,6 +24,11 @@ end
 if row_a~=1 then
     error('comm:gftrunc: Input argument should be a row vector')
 end
+    for j=1:col_a
+        if ( abs(a(1,j))~=a(1,j) | floor(a(1,j))~=a(1,j) )
+                error('comm:gftrunc:Elements Of A should be Positive Integers');
+        end
+    end
 at=a;
 for i=col_a:-1:1
     if a(1,i)~=0 then
