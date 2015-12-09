@@ -30,8 +30,8 @@ function [isOk, status]  = istrellis(S)
 // Check arguments
 [out_a,inp_a]=argn(0)
 
-if (inp_a~=1 | out_a~=2) then
-    error('comm:istrellis:Inalid number of arguments')
+if (inp_a~=1 | out_a>2) then
+    error('comm:istrellis:Invalid number of arguments')
 end
 
 status = '';
