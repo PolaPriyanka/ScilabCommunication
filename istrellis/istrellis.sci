@@ -39,7 +39,7 @@ status = '';
 // Check if input is a structure
 isOk = isstruct(S);
 if ~isOk then
-  status = string(('comm:trellis:inputNotStructure'));
+  status = string(('comm:trellis:Input is not a structure'));
   return;
 end
 
