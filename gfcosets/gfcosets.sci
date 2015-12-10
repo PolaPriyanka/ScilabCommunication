@@ -24,7 +24,7 @@ elseif ( isempty(p) | ~isscalar(p) | abs(p)~=p | floor(p)~=p | length(factor(p))
 end
 
 if ( isempty(m) | ~isscalar(m) | ~isreal(m) | floor(m)~=m | m<1 )
-    error(message('comm:gfcosets: M should be a positive integer'));
+    error('comm:gfcosets: M should be a positive integer');
 end
 
 //Initialization
