@@ -1,0 +1,52 @@
+function result = iscatastrophic(trellis)
+//   ISCATASTROPHIC  Determine if a convolutional code is catastrophic or not
+//   RESULT = ISCATASTROPHIC(TRELLIS) returns 1 if the specified 
+//   trellis corresponds to a catastrophic convolutional code, else 0.
+
+//Written by Pola Lakshmi Priyanka, FOSSEE, IIT Bombay//
+
+
+// Check number of input arguments
+[out_a,inp_a]=argn(0)
+
+if inp_a~=1 then
+    error('comm:iscatastrophic: Invalid number of input arguments')
+end
+
+
+if out_a>1 then
+    error('comm:iscatastrophic: Invalid number of output arguments')
+end
+
+// Check if the input is a valid trellis
+if ~istrellis(trellis),
+    error('comm:iscatastrophic:Input should be a valid trellis structure.');  
+end
+
+result = 0;
+
+// Find indices of zeros in trellis structure
+[r_idx,c_idx] = find(trellis.outputs==0);
+
+//Find Connectivity matrix and check if it is catastrophic
+A = zeros(trellis.numStates,trellis.numStates);
+for k = 2:length(r_idx)
+    A(r_idx(k),trellis.nextStates(r_idx(k),c_idx(k))+1)=1;
+end
+
+
+test = A;
+for i = 1:trellis.numStates
+    for j = 1:trellis.numStates
+        if test(j,j)==1
+            result = 1
+        end
+    end
+    if result==1
+        break
+    else
+        test = test*A;
+    end
+end
+
+endfunction
