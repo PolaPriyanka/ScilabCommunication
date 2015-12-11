@@ -24,11 +24,11 @@ if out_a>1 then
 end
 
 // Error Check for input arguments
-if(~isscalar(R) | ~or(type(R)==[1 5 8]) | ~isreal(R) | R==//inf | R~=floor(R) | R<=0) then
+if(~isscalar(R) | ~or(type(R)==[1 5 8]) | ~isreal(R) | R==%inf | R~=floor(R) | R<=0) then
     error('comm:lteZadoffChuSeq: Input argument 1 should be a finite positive integer')
 end
 
-if(~isscalar(N) | ~or(type(N)==[1 5 8]) | ~isreal(N) | N==//inf | N~=floor(N) | N<=0 | modulo(N,2)==0) then
+if(~isscalar(N) | ~or(type(N)==[1 5 8]) | ~isreal(N) | N==%inf | N~=floor(N) | N<=0 | modulo(N,2)==0) then
     error('comm:lteZadoffChuSeq:Input argument 2 is invalid')
 end
 
@@ -38,6 +38,6 @@ end
 
 
 m = (0:N-1).';
-seq = exp( -complex(0,1) * //pi * R * m.*(m+1) / N );
+seq = exp( -complex(0,1) * %pi * R * m.*(m+1) / N );
 
 endfunction
