@@ -38,6 +38,6 @@ end
 
 
 m = (0:N-1).';
-seq = exp( -complex(0,1) * //pi * R * m.*(m+1) / N );
+seq = exp( -complex(0,1) * %pi * R * m.*(m+1) / N );
 
 endfunction
