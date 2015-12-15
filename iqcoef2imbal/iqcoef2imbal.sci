@@ -64,4 +64,6 @@ for i = 1:length(Comp_Coef)
         Amp_Imb_DB(i) = 20*log10(K(1,1)/K(2,2));
         Ph_Imb_Deg(i) = -2*atan(K(2,1)/K(1,1))/%pi*180;
     end
+end
+
 endfunction
