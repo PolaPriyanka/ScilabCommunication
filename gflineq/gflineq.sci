@@ -8,7 +8,8 @@ function [x, sflag] = gflineq(a, b, p)
 //   equation A X = B in GF(P) and SFLAG=1.
 //   If the equation has no solution, then X is empty and SFLAG = 0.
 //
-
+// Written by POLA LAKSHMI PRIYANKA, FOSSEE, IIT BOMBAY //
+ 
 // Check number of input arguments
 [out_a,inp_a]=argn(0)        
 
