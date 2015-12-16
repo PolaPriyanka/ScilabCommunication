@@ -1,0 +1,5 @@
+[a_imb_db,ph_imb_deg] = iqcoef2imbal([4 2 complex(-0.1145,0.1297) complex(-0.0013,0.0029)])
+disp(a_imb_db,'amplitude imbalance in dB =')
+disp(ph_imb_deg,'phase imbalance in degrees=')
+Comp_Coef = iqimbal2coef(a_imb_db, ph_imb_deg)
+disp(Comp_Coef,'Compensator Coefficients=')
