@@ -2,10 +2,12 @@ function [Amp_Imb_DB, Ph_Imb_Deg] = iqcoef2imbal(Comp_Coef)
 //   IQCOEF2IMBAL returns the amplitude imbalance and phase imbalance 
 //   that a given compensator coefficient will correct.
 
-//   [Amp_Imb_DB, Ph_Imb_Deg] = iqcoef2imbal(Comp_Coef) returns
+//   [AMP_IMB_DB, PH_IMB_DEG] = IQCOEF2IMBAL(COMP_COEF) returns
 //   the amplitude imbalance and phase imbalance 
 //   that a given compensator coefficient will correct.
-//   C is a scalar or a vector. A and P are the amplitude imbalance in dB
+
+//   Comp_Coef is a scalar or a vector of complex numbers.
+//   AMP_IMB_DB and PH_IMB_DEG are the amplitude imbalance in dB
 //   and the phase imbalance in degrees.
 
 //   Reference : http://in.mathworks.com/help/comm/ref/iqcoef2imbal.html
@@ -65,3 +67,5 @@ for i = 1:length(Comp_Coef)
         Ph_Imb_Deg(i) = -2*atan(K(2,1)/K(1,1))/%pi*180;
     end
 end
+
+endfunction
